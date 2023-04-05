@@ -49,22 +49,22 @@ class ProductsController extends BaseController
         }
 
         public function manageProducts(){
-           $manageproduct = DB::table('product')->select('product.*','product_description.*')->Join('product_description', 'product.product_id', '=', 'product_description.product_id')
+           $manageproduct = DB::table('oc_product')->select('oc_product.*','oc_product_description.*')->Join('oc_product_description', 'oc_product.product_id', '=', 'oc_product_description.product_id')
 		   
-		 ->orderBy('product.product_id','Asc')->get();
+		 ->orderBy('oc_product.product_id','Asc')->get();
 
 			  
-		$sql = "SELECT a.*,b.name FROM product a,product_description b WHERE a.product_id=b.product_id and  quantity <= (SELECT MAX(minimum) - MIN(quantity) FROM product)";
+		$sql = "SELECT a.*,b.name FROM oc_product a,oc_product_description b WHERE a.product_id=b.product_id and  quantity <= (SELECT MAX(minimum) - MIN(quantity) FROM oc_product)";
         $manageminimumstocks = DB::select(DB::raw($sql));
 
 
-          $manageorder = DB::table('order')->select('order.*','product.*')->Join('product', 'product.product_id', '=', 'order.product_id')->where('order.status', '=','ordered')->orderBy('order.id','Asc')->get();
+          //$manageorder = DB::table('oc_order')->select('oc_order.*','oc_product.*')->orderBy('oc_order.id','Asc')->get();
           
 			  
 
 
 					
-   return view("products.index")->with('manageproduct', $manageproduct)->with('manageminimumstocks', $manageminimumstocks)->with('manageorder', $manageorder);
+   return view("products.index")->with('manageproduct', $manageproduct)->with('manageminimumstocks', $manageminimumstocks);
         }
 
 /******   Add ph_prods  Start ******/
@@ -154,7 +154,7 @@ class ProductsController extends BaseController
                 'status'                =>   "received",
                 ]);
 
-                $product = DB::table('product')->where('product_id',$request->product_id)->update([
+                $product = DB::table('oc_product')->where('product_id',$request->product_id)->update([
                 'quantity'                =>  $calculated,
                 ]);
 

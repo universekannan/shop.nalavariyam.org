@@ -35,9 +35,9 @@ class BillController extends BaseController
 
  public function manageBill()
         {
-          $manageproducts = DB::table('product')->select('product.*','product_description.name','product_description.product_id','product.product_id as pID')
-                ->Join('product_description', 'product.product_id', '=', 'product_description.product_id')
-                ->orderBy('product.product_id','Asc')->get();
+          $manageproducts = DB::table('oc_product')->select('oc_product.*','oc_product_description.name','oc_product_description.product_id','oc_product.product_id as pID')
+                ->Join('oc_product_description', 'oc_product.product_id', '=', 'oc_product_description.product_id')
+                ->orderBy('oc_product.product_id','Asc')->get();
            
             return view("Bill.newbill")->with('manageproducts',$manageproducts);
         }
@@ -50,6 +50,7 @@ class BillController extends BaseController
 
            foreach($sales_array as $sal){
             $item_id = $sal["item_id"];
+            echo $item_id;
             $item_quantity = $sal["item_quantity"];
             $item_rate = $sal["item_rate"];
             $item_amount = $sal["item_amount"];

@@ -1,39 +1,39 @@
 @extends('layout')
 @section('content')
 <div class="content-wrapper">
- <section class="content">
+   <section class="content">
     <section class="content">
         <div class="container-fluid">
-         <div class="row">
-          <div class="col-md-3">
-              <div class="card card-info">
-                <div class="card-body">
+           <div class="row">
+              <div class="col-md-3">
+                  <div class="card card-info">
+                    <div class="card-body">
 
-                    <div class="form-group row">
-                      <select class="form-control select2bs4 product" style="width: 100%;" name="PID" id="PID" onchange="show_vbm()">
-                        <option>select Product</option>
-                        @foreach($manageproducts as $key=>$manageproduct)
-                        <option value="{{ $manageproduct->product_id }}~{{ $manageproduct->name }}" data-rate="{{$manageproduct->price }}">
-                           {{ $manageproduct->name }}</option>
-                           @endforeach
-                       </select>
+                        <div class="form-group row">
+                          <select class="form-control select2bs4 product" style="width: 100%;" name="PID" id="PID" onchange="show_vbm()">
+                            <option>select Product</option>
+                            @foreach($manageproducts as $key=>$manageproduct)
+                            <option value="{{ $manageproduct->product_id }}~{{ $manageproduct->name }}" data-rate="{{$manageproduct->price }}">
+                             {{ $manageproduct->name }}</option>
+                             @endforeach
+                         </select>
+                     </div>
+                     <div class="form-group row">
+                       <input  required="required" type="text" class="form-control rate"
+                       name="product_code" id="rate" disabled  maxlength="50" 
+                       placeholder="Price">
                    </div>
                    <div class="form-group row">
-                     <input  required="required" type="text" class="form-control rate"
-                     name="product_code" id="rate" disabled  maxlength="50" 
-                     placeholder="Price">
-                 </div>
-                 <div class="form-group row">
-                     <input onkeyup="calculate_amount()"  required="required" type="number" class="form-control"
-                     name="product_code" id="quantity"
-                     placeholder="Quantity">
-                 </div>
-                 <div class="form-group row">
-                     <input  required="required" disabled type="text" class="form-control"
-                     name="total" id="total" 
-                     placeholder="Total">
-                 </div>
-                 <div class="form-group row">
+                       <input onkeyup="calculate_amount()"  required="required" type="number" class="form-control"
+                       name="product_code" id="quantity"
+                       placeholder="Quantity">
+                   </div>
+                   <div class="form-group row">
+                       <input  required="required" disabled type="text" class="form-control"
+                       name="total" id="total" 
+                       placeholder="Total">
+                   </div>
+                   <div class="form-group row">
                     <div class="col-md-12 text-center">
                         <a onclick="return add_row()" required="required" class="btn btn-success"
                         type="button"
@@ -85,49 +85,48 @@
 
                             </tbody>
                         </table>
-                       
+
+                    </div>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12 col-md-8"></div>
+                <label class="control-label col-md-1">Total</label>
+
+                <div class="col-md-3 pull-right form-inline">
+
+                    <input readonly type="text" name="total_amount" id="total_amount" class="form-control Number">
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12 col-md-4"></div>
+                <label class="control-label col-md-1"></label>
+
+                <div class="col-md-3 pull-right form-inline">
+
+                    <form class="form-inline" name="cust_form" role="form" method="post">
+                        <div class="form-group">
+
+                            <div class="b"> 
+                                <div  style="float:right">
+                                    <a onclick="submit_data()" required="required" class="btn-info btn-sm"
+                                    type="button"
+                                    name="save"/>save</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
         </div>
-
-         <div class="form-group row">
-            <div class="col-sm-12 col-md-8"></div>
-                            <label class="control-label col-md-1">Total</label>
-                        
-                        <div class="col-md-3 pull-right form-inline">
-
-                            <input readonly type="text" name="total_amount" id="total_amount" class="form-control Number">
-
-                        </div>
-                    </div>
-
-         <div class="form-group row">
-            <div class="col-sm-12 col-md-4"></div>
-                            <label class="control-label col-md-1"></label>
-                        
-                        <div class="col-md-3 pull-right form-inline">
-
-                                <form class="form-inline" name="cust_form" role="form" method="post">
-                                    <div class="form-group">
-                                       
-                                <div class="b"> 
-                                    <div  style="float:right">
-                                        <a onclick="submit_data()" required="required" class="btn-info btn-sm"
-                                               type="button"
-                                               name="save" />save</a>
-
-
-                                    </div>
-                                    </div>
-
-                                    </div>
-                                </form>
-
-                        </div>
-                    </div>
-                
     </div>
-</div>
 </div>
 </div>
 
@@ -155,7 +154,7 @@
 <script src="{!! asset('dist/js/pages/dashboard2.js') !!}"></script>
 <script src="{!! asset('plugins/select2/js/select2.full.min.js') !!}"></script>
 <script>
- $(function () {
+   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
 
