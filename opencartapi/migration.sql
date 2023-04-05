@@ -7,6 +7,4 @@ update users set full_name='Nagercoil',user_types_id=2 where id=15 ;
 update users set full_name='Parvathipuram',user_types_id=2 where id=16 ;
 update users set full_name='Nagercoil Staff',user_types_id=3 where id=17 ;
 update users set full_name='Parvathipuram Staff',user_types_id=3 where id=18 ;
-update users set first_name='',last_name='';  
-
---git remote add origin https://github.com/universekannan/shop.nalavariyam.org.git
+update users set first_name='',last_name='';
