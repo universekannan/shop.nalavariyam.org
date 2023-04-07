@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/addroles', 'App\Http\Controllers\PermissionsController@addRoles');
 
     Route::get('/products', 'App\Http\Controllers\ProductsController@manageProducts'); 
+    Route::post('/save_purchase', 'App\Http\Controllers\ProductsController@save_purchase');
     Route::post('/order', 'App\Http\Controllers\ProductsController@Order');
     Route::post('/stock', 'App\Http\Controllers\ProductsController@Stock');
 

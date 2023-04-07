@@ -61,13 +61,41 @@
 </script>
 <script>
 
-   function show_purchase_modal(product_id,name,min_stock,avl_stock){
-      $("#product_id").val(product_id);
-      $("#product_name").html(name);
-      $("#min_stock").html(min_stock);
-      $("#avl_stock").html(avl_stock);
-      $('#purchasemodal').modal('show');
-   }   
+ function show_purchase_modal(product_id,name,min_stock,avl_stock){
+    $("#product_id").val(product_id);
+    $("#product_name").html(name);
+    $("#min_stock").html(min_stock);
+    $("#avl_stock").html(avl_stock);
+    $('#purchasemodal').modal('show');
+ }   
+
+ function save_purchase(){
+    var CSRF_TOKEN = $("input[name=_token]").val();
+    var item_id = $("#product_id").val(); 
+    var pqty = $("#pqty").val(); 
+    if(pqty ==""){
+      alert("Enter Purchase Quantity");
+      $("#pqty").focus();
+      return;
+    }
+    var url =  "{{ url('save_purchase') }}";
+    $.ajax({
+     type: 'POST',
+     url: url,
+     data: {
+         item_id: item_id,
+         pqty: pqty,
+         _token: CSRF_TOKEN
+     },
+     success: function (data) {
+      $('#purchasemodal').modal('toggle');
+     },
+     error : function(error){
+         alert(error);
+         $('#purchasemodal').modal('toggle');
+     }
+    });
+ }
 
   $(document).ready(function () {
 
@@ -126,6 +154,13 @@
     $("#custom").click(function(){
       $("#showCustom").toggle(500);
     });
+
+    $('.number').keypress(function (event) {
+    var keycode = event.which;
+    if (!(event.shiftKey == false && (keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
+        event.preventDefault();
+    }
+});
   });
 </script>
 
