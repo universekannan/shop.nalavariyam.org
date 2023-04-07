@@ -61,6 +61,14 @@
 </script>
 <script>
 
+   function show_purchase_modal(product_id,name,min_stock,avl_stock){
+      $("#product_id").val(product_id);
+      $("#product_name").html(name);
+      $("#min_stock").html(min_stock);
+      $("#avl_stock").html(avl_stock);
+      $('#purchasemodal').modal('show');
+   }   
+
   $(document).ready(function () {
 
     $("#example1").DataTable({

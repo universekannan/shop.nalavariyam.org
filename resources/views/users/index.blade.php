@@ -31,9 +31,12 @@
 <thead>
 <tr>
                     <th>#ID</th>
+                    @if(Auth::user()->user_types_id == 1)
+                    <th>Shop Name</th>
+                    @else
                     <th>User Type</th>
+                    @endif
                     <th>Full Name</th>
-                    <th>Gender</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Status</th>
@@ -44,9 +47,12 @@
                     @foreach($manageusers as $key=>$manageuserslist)
                       <tr>
                         <td>{{ $key + 1 }}</td>
+                        @if(Auth::user()->user_types_id == 1)
+                        <td>{{ $manageuserslist->shop_name }}</td>
+                        @else
                         <td>{{ $manageuserslist->user_types_name }}</td>
+                        @endif
                         <td>{{ $manageuserslist->full_name }}</a></td>
-                        <td>{{ $manageuserslist->gender }}</td>
                         <td>{{ $manageuserslist->email }}</td>
                         <td>{{ $manageuserslist->mobile_number }}</td>
                         @if($manageuserslist->status == 1)
@@ -146,12 +152,24 @@
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
+   @if(Auth::user()->user_types_id == 1)
+<h4 class="modal-title">Add Shop</h4>
+@else
 <h4 class="modal-title">Add User</h4>
+
+@endif
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 <span aria-hidden="true">&times;</span>
 </button>
 </div>
             <div class="modal-body">
+
+              <div class="row">
+                <div class="col-md-12"> 
+                <input @if(Auth::user()->user_types_id == 2) value="{{ $shop_name }}" readonly @endif type="text" class="form-control mb-3" name="shop_name" maxlength="50" placeholder="Enter Shop Name"/>
+              </div>
+              </div>
+
                 <div class="row">
                 <div class="col-md-6">   
                   <input type="text" class="form-control mb-3" name="first_name" placeholder="Enter First Name"/>
@@ -161,7 +179,6 @@
                   <input type="password" class="form-control mb-3" name="password" placeholder="Enter Password"/>
 
                  <select  class="form-control mb-3" name="user_types_id">
-                      <option value="">Select User Type</option>
                    @foreach($userrole as $key=>$userrole)
                       <option value="{{ $userrole->id }}">{{ $userrole->user_types_name }}</option>
                   @endforeach

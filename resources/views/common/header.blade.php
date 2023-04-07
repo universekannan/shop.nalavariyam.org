@@ -59,17 +59,12 @@ legend {
    </li>
 </div>
   </div>
-<?php if($permission->dashboard == 1){ ?>
  <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="{{url('/dashboard')}}">
       <img src="{!! asset('dist/img/icon/opd.png') !!}" style="width:50px"></br>
       <label>Dashboard</label>
     </a>
 </li>
-<?php } else{
-          redirect()->intended('/login');
- } ?>
-<?php if($permission->users == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
         <img src="{!! asset('dist/img/icon/user.png') !!}" style="width:50px"></br>
 <div class="dropdown">
@@ -87,24 +82,18 @@ legend {
 @endif
 </div>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/admission.png') !!}" style="width:50px"></br>
       <label>Admission</label>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="{{url('Bill/newbill')}}">
       <img src="{!! asset('dist/img/icon/billing.png') !!}" style="width:50px"></br>
       <label>Billing</label>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
     <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/pharmacy.png') !!}" style="width:50px"></br>
@@ -118,32 +107,24 @@ legend {
     </a>
 </li>
 
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/investigation.png') !!}" style="width:50px"></br>
       <label>Investigation</label>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/ot.png') !!}" style="width:50px"></br>
       <label>OT</label>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/admission.png') !!}" style="width:50px"></br>
       <label>MRD</label>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/appointment.png') !!}" style="width:50px"></br>
@@ -158,8 +139,6 @@ legend {
       </div>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/setting.png') !!}" style="width:50px"></br>
@@ -176,16 +155,12 @@ legend {
       </div>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="">
       <img src="{!! asset('dist/img/icon/investigation.png') !!}" style="width:50px"></br>
       <label>MIS</label>
     </a>
 </li>
-<?php } ?>
-<?php if($permission->dashboard == 1){ ?>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
        <img src="{!! asset('dist/img/icon/logout.png') !!}" style="width:50px"></br>
       <div class="dropdown">
@@ -198,7 +173,6 @@ legend {
         </div>
       </div>
     </li>  
-<?php } ?>
     </ul>
   </nav>
   
