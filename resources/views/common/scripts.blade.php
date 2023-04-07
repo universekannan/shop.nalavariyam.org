@@ -79,6 +79,7 @@
       return;
     }
     var url =  "{{ url('save_purchase') }}";
+    var product_url =  "{{ url('products') }}";
     $.ajax({
      type: 'POST',
      url: url,
@@ -89,6 +90,7 @@
      },
      success: function (data) {
       $('#purchasemodal').modal('toggle');
+      window.location.href = product_url;
      },
      error : function(error){
          alert(error);
@@ -107,7 +109,7 @@
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": false,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,

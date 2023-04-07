@@ -37,9 +37,9 @@ z-index: 9;
          aria-selected="true">Product</a>
       </li>
 
-      <div class="col-sm-8">
+      <!-- <div class="col-sm-8">
          <input type="text" class="form-control" id="myInput"  placeholder="Enter Product Name">
-      </div>
+      </div> -->
 
    </ul>
 </div>
