@@ -53,8 +53,8 @@ z-index: 9;
                   <th>Code</th>
                   <th>Model Name</th>
                   <th>Product Name</th>
-                  <th>Quantity</th>
-                  <th>MOQ</th>
+                  <th>Available Stock</th>
+                  <th>Minimum Stock</th>
                   <th>Price</th>
                   <th>Action</th>
                </tr>
