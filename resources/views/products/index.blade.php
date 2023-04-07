@@ -73,7 +73,7 @@ z-index: 9;
                   @if($prod->pending_purchase == 0)
                   <td><a onclick="show_purchase_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}')" href="#" class="btn btn-xs btn-success">Purchase</a></td>
                   @else
-                  <td>Pending</td>
+                  <td style="color:red">Pending</td>
                   @endif
                   @else
                   <td></td>
