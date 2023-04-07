@@ -69,7 +69,11 @@ z-index: 9;
                   <td>{{ $prod->quantity }}</td>
                   <td>{{ $prod->minimum }}</td>
                   <td>{{ $prod->price }}</td>
+                  @if(Auth::user()->user_types_id != 1 && $prod->pending_purchase == 0)
                   <td><a onclick="show_purchase_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}')" href="#" class="btn btn-xs btn-success">Purchase</a></td>
+                  @else
+                  <td></td>
+                  @endif
                </tr>
                @endforeach 
             </tbody>
