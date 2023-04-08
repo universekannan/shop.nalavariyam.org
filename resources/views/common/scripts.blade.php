@@ -73,7 +73,7 @@
     var CSRF_TOKEN = $("input[name=_token]").val();
     var item_id = $("#product_id").val(); 
     var pqty = $("#pqty").val(); 
-    if(pqty ==""){
+    if(pqty == ""){
       alert("Enter Purchase Quantity");
       $("#pqty").focus();
       return;
@@ -90,20 +90,22 @@
      },
      success: function (data) {
       $('#purchasemodal').modal('toggle');
-      window.location.href = product_url;
+      //window.location.href = product_url;
+      $("#pqty").val("");
+      $("#purchasetd_"+item_id).html("Pending");
      },
      error : function(error){
-         alert(error);
+         //alert(error);
          $('#purchasemodal').modal('toggle');
      }
     });
  }
 
   $(document).ready(function () {
-
+    //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["excel", "pdf", "print"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     $('#example2').DataTable({

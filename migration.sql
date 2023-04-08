@@ -22,5 +22,14 @@ CREATE TABLE `purchase` (
 
 alter table users add shop_id int(11) default 0;
 
+CREATE TABLE `stock` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1;
+
+
 
 

@@ -34,7 +34,7 @@ z-index: 9;
    <ul  class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
       <li class="nav-item">
          <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" 
-         aria-selected="true">Product</a>
+         aria-selected="true">Minimum Stock Alert</a>
       </li>
 
       <!-- <div class="col-sm-8">

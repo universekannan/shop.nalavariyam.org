@@ -42,7 +42,6 @@ legend {
       $permission = DB::table('user_permission')->where('user_id',auth()->user()->id)->first();
  ?>
 <div class="preloader flex-column justify-content-center align-items-center">
-<img class="animation__shake" src="{!! asset('dist/img/AdminLTELogo.png') !!}" alt="AdminLTELogo" height="60" width="60">
 </div>
  <center>
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
@@ -51,7 +50,6 @@ legend {
     <ul class="navbar-nav">
  <div>  <div class="row">
 <a href="#" class="navbar-toggler order-1">
-<img src="http://127.0.0.1:8000/images/fleetopslogo.png" alt="AdminLTE Logo">
 </a>
 
    <li class="navbar-toggler order-1">
@@ -73,6 +71,8 @@ legend {
   <div class="dropdown-content">
   <a href="{{url('/users')}}">Users</a>
   <a href="{{url('/products')}}">Products</a>
+  <a href="{{url('/minimum')}}">Minimum Stock Alert</a>
+  <a href="{{url('/pending')}}">Pending Purchase</a>
   <a href="{{url('/users/userstype')}}">User Type</a>
   <a href="{{url('/users/setting')}}">Setting</a>
   <a href="{{url('/users/permissions')}}">Permissions</a>
