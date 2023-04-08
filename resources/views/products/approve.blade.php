@@ -70,7 +70,7 @@ z-index: 9;
                   <td>{{ $prod->minimum }}</td>
                   <td>{{ $prod->price }}</td>
                   @if(Auth::user()->user_types_id != 1)
-                  <td style="color:red" id="purchasetd_{{ $prod->product_id }}"><a onclick="show_approve_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}','{{ $prod->pqty }}')" href="#" class="btn btn-xs btn-success">Approve</a></td>
+                  <td style="color:red" id="purchasetd_{{ $prod->product_id }}"><a onclick="show_approve_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}','{{ $prod->pqty }}','{{ $prod->pur_id }}')" href="#" class="btn btn-xs btn-success">Approve</a></td>
                   @else
                   <td></td>
                   @endif
@@ -97,7 +97,8 @@ z-index: 9;
 <div class="modal-body">
 <form method="post">
    {{ csrf_field() }}
-   <input type="hidden" class="form-control" id="product_id"  />
+   <input type="hidden" id="product_id"  />
+   <input type="hidden" id="purchase_id"  />
    <div class="row">
       <div class="col-md-4">Minimum Stock</div>
       <div class="col-md-8"><p id="min_stock"></p></div>

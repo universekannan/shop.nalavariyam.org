@@ -69,8 +69,9 @@
     $('#purchasemodal').modal('show');
  }   
 
- function show_approve_modal(product_id,name,min_stock,avl_stock,pqty){
+ function show_approve_modal(product_id,name,min_stock,avl_stock,pqty,pur_id){
     $("#product_id").val(product_id);
+    $("#purchase_id").val(pur_id);
     $("#product_name").html(name);
     $("#min_stock").html(min_stock);
     $("#avl_stock").html(avl_stock);
@@ -81,30 +82,30 @@
  function approve_purchase(){
     var CSRF_TOKEN = $("input[name=_token]").val();
     var item_id = $("#product_id").val(); 
+    var pur_id = $("#purchase_id").val(); 
     var pqty = $("#pqty").val(); 
     if(pqty == ""){
       alert("Enter Purchase Quantity");
       $("#pqty").focus();
       return;
     }
-    var url =  "{{ url('save_purchase') }}";
-    var product_url =  "{{ url('products') }}";
+    var url =  "{{ url('approve_purchase') }}";
     $.ajax({
      type: 'POST',
      url: url,
      data: {
          item_id: item_id,
          pqty: pqty,
+         pur_id: pur_id,
          _token: CSRF_TOKEN
      },
      success: function (data) {
       $('#purchasemodal').modal('toggle');
-      //window.location.href = product_url;
       $("#pqty").val("");
-      $("#purchasetd_"+item_id).html("Pending");
+      $("#purchasetd_"+item_id).html("");
      },
      error : function(error){
-         //alert(error);
+         alert(JSON.stringify(error));
          $('#purchasemodal').modal('toggle');
      }
     });

@@ -53,11 +53,30 @@ class ProductsController extends BaseController
       $created_at = date("Y-m-d H:i:s");
       $item_id = $request->item_id;
       $pqty = $request->pqty;
-      $sql="select * from purchase where shop_id=$shop_id and item_id=$item_id";
+      $sql="select * from purchase where shop_id=$shop_id and item_id=$item_id and status=0";
       $result = DB::select(DB::raw($sql));
       if(count($result) > 0){
       }else{
         $sql = "insert into purchase (shop_id,item_id,pqty,created_at) values ($shop_id,$item_id,$pqty,'$created_at')";
+        DB::insert($sql);
+      }
+    }
+
+    public function approve_purchase(Request $request){
+      $shop_id = Auth::user()->shop_id;
+      $created_at = date("Y-m-d H:i:s");
+      $item_id = $request->item_id;
+      $pqty = $request->pqty;
+      $pur_id = $request->pur_id;
+      $sql="update purchase set status=1 where id=$pur_id";
+      DB::update($sql);
+      $sql="select * from stock where shop_id=$shop_id and item_id=$item_id";
+      $result = DB::select(DB::raw($sql));
+      if(count($result) > 0){
+        $sql="update stock set stock=stock+$pqty where shop_id=$shop_id and item_id=$item_id";
+        DB::update($sql);
+      }else{
+        $sql = "insert into stock (shop_id,item_id,stock) values ($shop_id,$item_id,$pqty)";
         DB::insert($sql);
       }
     }
@@ -80,7 +99,7 @@ class ProductsController extends BaseController
 
   public function approve(){
     $shop_id = Auth::user()->shop_id;
-    $sql = "select * from oc_product a,oc_product_description b,purchase c where a.product_id=b.product_id and c.shop_id=$shop_id and a.product_id=c.item_id and c.status=0 order by a.product_id";
+    $sql = "select *,c.id as pur_id from oc_product a,oc_product_description b,purchase c where a.product_id=b.product_id and c.shop_id=$shop_id and a.product_id=c.item_id and c.status=0 order by a.product_id";
     $manageproduct = DB::select(DB::raw($sql));
     return view("products.approve")->with('manageproduct', $manageproduct);
   }
@@ -99,7 +118,7 @@ class ProductsController extends BaseController
     $manageproduct = DB::select(DB::raw($sql));
     foreach($manageproduct as $key => $mp){
      $item_id = $mp->product_id;
-     $sql="select * from purchase where shop_id=$shop_id and item_id=$item_id";
+     $sql="select * from purchase where shop_id=$shop_id and item_id=$item_id and status=0";
      $res = DB::select(DB::raw($sql));
      $mp->pending_purchase=0;
      if(count($res) > 0){
