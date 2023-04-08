@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/products', 'App\Http\Controllers\ProductsController@manageProducts');
     Route::get('/minimum', 'App\Http\Controllers\ProductsController@minimum'); 
     Route::get('/pending', 'App\Http\Controllers\ProductsController@pending'); 
+    Route::get('/approve', 'App\Http\Controllers\ProductsController@approve'); 
     Route::post('/save_purchase', 'App\Http\Controllers\ProductsController@save_purchase');
     Route::post('/order', 'App\Http\Controllers\ProductsController@Order');
     Route::post('/stock', 'App\Http\Controllers\ProductsController@Stock');

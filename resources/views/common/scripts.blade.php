@@ -69,6 +69,46 @@
     $('#purchasemodal').modal('show');
  }   
 
+ function show_approve_modal(product_id,name,min_stock,avl_stock,pqty){
+    $("#product_id").val(product_id);
+    $("#product_name").html(name);
+    $("#min_stock").html(min_stock);
+    $("#avl_stock").html(avl_stock);
+    $("#pqty").val(pqty);
+    $('#purchasemodal').modal('show');
+ }   
+ 
+ function approve_purchase(){
+    var CSRF_TOKEN = $("input[name=_token]").val();
+    var item_id = $("#product_id").val(); 
+    var pqty = $("#pqty").val(); 
+    if(pqty == ""){
+      alert("Enter Purchase Quantity");
+      $("#pqty").focus();
+      return;
+    }
+    var url =  "{{ url('save_purchase') }}";
+    var product_url =  "{{ url('products') }}";
+    $.ajax({
+     type: 'POST',
+     url: url,
+     data: {
+         item_id: item_id,
+         pqty: pqty,
+         _token: CSRF_TOKEN
+     },
+     success: function (data) {
+      $('#purchasemodal').modal('toggle');
+      //window.location.href = product_url;
+      $("#pqty").val("");
+      $("#purchasetd_"+item_id).html("Pending");
+     },
+     error : function(error){
+         //alert(error);
+         $('#purchasemodal').modal('toggle');
+     }
+    });
+ } 
  function save_purchase(){
     var CSRF_TOKEN = $("input[name=_token]").val();
     var item_id = $("#product_id").val(); 

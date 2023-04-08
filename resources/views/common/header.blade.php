@@ -73,6 +73,7 @@ legend {
   <a href="{{url('/products')}}">Products</a>
   <a href="{{url('/minimum')}}">Minimum Stock Alert</a>
   <a href="{{url('/pending')}}">Pending Purchase</a>
+  <a href="{{url('/approve')}}">Approve Purchase</a>
   <a href="{{url('/users/userstype')}}">User Type</a>
   <a href="{{url('/users/setting')}}">Setting</a>
   <a href="{{url('/users/permissions')}}">Permissions</a>
