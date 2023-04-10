@@ -61,17 +61,18 @@ z-index: 9;
             </thead>
             <tbody>
                @foreach($manageproduct as $key=>$prod)
+               @if($prod->stock < $prod->minimum)
                <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $prod->product_id }}</td>
                   <td>{{ $prod->model }}</td>
                   <td>{{ $prod->name }}</td>
-                  <td>{{ $prod->quantity }}</td>
+                  <td>{{ $prod->stock }}</td>
                   <td>{{ $prod->minimum }}</td>
                   <td>{{ $prod->price }}</td>
                   @if(Auth::user()->user_types_id != 1)
                   @if($prod->pending_purchase == 0)
-                  <td style="color:red" id="purchasetd_{{ $prod->product_id }}"><a onclick="show_purchase_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}')" href="#" class="btn btn-xs btn-success">Purchase</a></td>
+                  <td style="color:red" id="purchasetd_{{ $prod->product_id }}"><a onclick="show_purchase_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->stock }}')" href="#" class="btn btn-xs btn-success">Purchase</a></td>
                   @else
                   <td style="color:red">Pending</td>
                   @endif
@@ -79,6 +80,7 @@ z-index: 9;
                   <td></td>
                   @endif
                </tr>
+               @endif
                @endforeach 
             </tbody>
          </table>

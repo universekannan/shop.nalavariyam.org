@@ -122,7 +122,7 @@
      success: function (data) {
       $('#purchasemodal').modal('toggle');
       $("#pqty").val("");
-      $("#purchasetd_"+item_id).html("");
+      $("#purchasetd_"+item_id).closest('tr').html("");
      },
      error : function(error){
          alert(JSON.stringify(error));
@@ -4213,7 +4213,6 @@ $(document).ready(function(){
     var VBMArray = $("#PID").val().split("~");
     var product_id = VBMArray[0];
     var name = VBMArray[1];
-    alert(product_id);
     $("#name").html(name)
     var amount=$('#total').val();
     if(amount!="")
@@ -4276,14 +4275,13 @@ $(document).ready(function(){
 
   function submit_data()
   {
+    var CSRF_TOKEN = $("input[name=_token]").val();
     var total_amount = ~~parseInt($('#total_amount').val());
     if(total_amount<=0)
     {
       alert("Amount should be greater than zero");
       return;
     }
-
-          //var total_amount1 = ~~parseInt($('#total_amount1').val());
     var item_id = $('input[name="product_id[]"]');
     var item_quantity = $('input[name="item_quantity[]"]');
     var item_rate = $('input[name="item_rate[]"]');
@@ -4292,38 +4290,29 @@ $(document).ready(function(){
     var sales = new Array();
     for(var j=0;j<i;j++)
     {
-
-              //alert(tot_amount.eq(j).val());
       var record = {'item_id':item_id.eq(j).val(),'item_quantity':item_quantity.eq(j).val(),'item_rate':item_rate.eq(j).val(),'item_amount':item_amount.eq(j).val(),'tot_amount':tot_amount.eq(j).val()};
       sales.push(record);
     }
     var sales_data = JSON.stringify(sales);
     console.log(sales_data);
-
-
     $.ajax({
-
-      url: "{{url('/getdata')}}",
+      url: "{{ url('/savebill') }}",
       type: "POST",
       data: {
-        item_id: product_id,
         sales: sales_data,
         amount:total_amount,
-        _token: '{{csrf_token()}}' 
+        _token: CSRF_TOKEN
       },
       success: function (sales_id) 
       {
-        console.log(sales_id);
-
+        $("#total_amount").val('');
         for(var j=0;j<i;j++){
-          $("#total_amount").val('');
           $("#addr"+(j)).html('');
-
         }
         i = 0;
         //window.open('Bill.newbill' '_blank');
+        alert("Bill #: "+sales_id);
       }
-      
     });
   }
 

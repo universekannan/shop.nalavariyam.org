@@ -42,20 +42,34 @@ class BillController extends BaseController
             return view("Bill.newbill")->with('manageproducts',$manageproducts);
         }
 
-        public function getdata(Request $request)
-        {
-           $sales = $request->get('sales');
-           $amount = $request->get('amount');
-           $sales_array = json_decode($sales,true);
-
-           foreach($sales_array as $sal){
-            $item_id = $sal["item_id"];
-            echo $item_id;
-            $item_quantity = $sal["item_quantity"];
-            $item_rate = $sal["item_rate"];
-            $item_amount = $sal["item_amount"];
-           }
-
-       }
+      public function savebill(Request $request)
+      {
+        $shop_id = Auth::user()->shop_id;
+        $sales = $request->get('sales');
+        $amount = $request->get('amount');
+        $sales_array = json_decode($sales,true);
+        $bill_date = date("Y-m-d");
+        $billnum = 0;
+        $sql="select max(billnum) bilnum from shop_billing where shop_id=$shop_id";
+        $result = DB::select(DB::raw($sql));
+        if(count($result) > 0){
+          $billnum = $result[0]->bilnum;
+          $billnum = $billnum + 1;
+        }else{
+          $billnum = 1;
+        }
+        $sql = "insert into shop_billing (shop_id,billnum,bill_date,total) values ($shop_id,$billnum,'$bill_date',$amount)";
+        DB::insert($sql);
+        $bill_id = DB::getPdo()->lastInsertId();
+        foreach($sales_array as $sal){
+          $item_id = $sal["item_id"];
+          $quantity = $sal["item_quantity"];
+          $rate = $sal["item_rate"];
+          $amount = $sal["item_amount"];
+          $sql = "insert into shop_bill_items (shop_id,bill_id,item_id,quantity,item_rate,amount) values ($shop_id,$bill_id,$item_id,$quantity,$rate,$amount)";
+          DB::insert($sql);
+        }
+        echo $billnum;
+      }
 
 }

@@ -108,20 +108,17 @@
                 <div class="col-md-3 pull-right form-inline">
 
                     <form class="form-inline" name="cust_form" role="form" method="post">
+                        {{ csrf_field() }}
                         <div class="form-group">
-
                             <div class="b"> 
                                 <div  style="float:right">
-                                    <a onclick="submit_data()" required="required" class="btn-info btn-sm"
+                                    <a onclick="submit_data()" required="required" class="btn btn-success"
                                     type="button"
-                                    name="save"/>save</a>
-
-
+                                    name="save"/>SAVE</a>
                                 </div>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
 

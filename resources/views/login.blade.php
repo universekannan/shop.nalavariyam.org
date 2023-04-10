@@ -4,7 +4,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="#" class="h1"><b>Health</b> Care</a>
+      <a href="#" class="h1"><b>Nalavariyam</b></a>
     </div>
     <div class="card-body">
 

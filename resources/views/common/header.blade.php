@@ -70,97 +70,43 @@ legend {
   <a class="dropbtn"><label>Users</label></a>
   <div class="dropdown-content">
   <a href="{{url('/users')}}">Users</a>
-  <a href="{{url('/products')}}">Products</a>
-  <a href="{{url('/minimum')}}">Minimum Stock Alert</a>
-  <a href="{{url('/pending')}}">Pending Purchase</a>
-  <a href="{{url('/approve')}}">Approve Purchase</a>
-  <a href="{{url('/users/userstype')}}">User Type</a>
-  <a href="{{url('/users/setting')}}">Setting</a>
   <a href="{{url('/users/permissions')}}">Permissions</a>
   </div>
-@else
-  <a href="{{url('/patients')}}">Patients</a>
 @endif
 </div>
 </li>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
-      <img src="{!! asset('dist/img/icon/admission.png') !!}" style="width:50px"></br>
-      <label>Admission</label>
-    </a>
+        <img src="{!! asset('dist/img/icon/product.png') !!}" style="width:50px"></br>
+<div class="dropdown">
+@if(Auth::user()->user_types_id == 1 || Auth::user()->user_types_id == 2)
+  <a class="dropbtn"><label>Products</label></a>
+  <div class="dropdown-content">
+  <a href="{{url('/products')}}">All Products</a>
+  <a href="{{url('/minimum')}}">Purchase</a>
+  <a href="{{url('/pending')}}">Purchase Print</a>
+  <a href="{{url('/approve')}}">Stock</a>
+  </div>
+@endif
+</div>
 </li>
+
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="{{url('Bill/newbill')}}">
       <img src="{!! asset('dist/img/icon/billing.png') !!}" style="width:50px"></br>
       <label>Billing</label>
     </a>
 </li>
-    <li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
-      <img src="{!! asset('dist/img/icon/pharmacy.png') !!}" style="width:50px"></br>
-      <div class="dropdown">
-        <a class="dropbtn">
-        <label>Pharmacy</label></a>
-        <div class="dropdown-content">
-        <a href="">Sales</a>
-        <a onclick="window.open('{{url('/pharmacy/newsales')}}','MY Window','height=700,width=1350,top=100,centeralign=200,right=300')" type="button">New Bill</a>        </div>
-      </div>
-    </a>
-</li>
-
+    
 <li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
-      <img src="{!! asset('dist/img/icon/investigation.png') !!}" style="width:50px"></br>
-      <label>Investigation</label>
-    </a>
-</li>
-<li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
-      <img src="{!! asset('dist/img/icon/ot.png') !!}" style="width:50px"></br>
-      <label>OT</label>
-    </a>
-</li>
-<li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
-      <img src="{!! asset('dist/img/icon/admission.png') !!}" style="width:50px"></br>
-      <label>MRD</label>
-    </a>
-</li>
-<li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
-      <img src="{!! asset('dist/img/icon/appointment.png') !!}" style="width:50px"></br>
-      <div class="dropdown">
-        <a class="dropbtn">
-        <label>Appointments</label></a>
-        <div class="dropdown-content">
-
-        <a href="{{url('/users/appointments')}}">Appointments</a>
-        <a href="">Change </a>
-        </div>
-      </div>
-    </a>
-</li>
-<li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
       <img src="{!! asset('dist/img/icon/setting.png') !!}" style="width:50px"></br>
             <div class="dropdown">
-        <a class="dropbtn">
-        <label>Setting</label></a>
-        <div class="dropdown-content">
-        <a href="{{url('/blocks')}}">Blocks</a>
-        <a href="">Change </a>
-        <a href="">Change </a>
-        <a href="">Change </a>
-        <a href="">Change </a>
-        </div>
+        <label>Setting</label>
+        
       </div>
-    </a>
 </li>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="">
       <img src="{!! asset('dist/img/icon/investigation.png') !!}" style="width:50px"></br>
       <label>MIS</label>
-    </a>
 </li>
 <li class="nav-item d-none d-sm-inline-block col-md-1">
        <img src="{!! asset('dist/img/icon/logout.png') !!}" style="width:50px"></br>
