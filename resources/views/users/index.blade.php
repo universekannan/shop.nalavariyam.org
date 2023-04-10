@@ -185,8 +185,8 @@
                   </select>
                    <select class="form-control mb-3" name="gender">
                     <option>Select Gender</option>
-                    <option value="Mail">Mail</option>
-                    <option value="Fmail">Femail</option>
+                    <option value="Mail">Male</option>
+                    <option value="Fmail">Female</option>
                   </select>
                 </div>
                 <div class="col-md-6">   
