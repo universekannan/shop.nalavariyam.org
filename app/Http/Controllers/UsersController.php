@@ -84,6 +84,7 @@ public function addUser(Request $request){
             return redirect('/users')->with('error', 'Email already used by another user');
         }else{*/
             $login_id =  Auth::user()->id;
+            $user_type = $request->user_types_id;
             $customers_id = DB::table('users')->insertGetId([
 
                 'full_name'		 		    =>   $request->first_name.' '.$request->last_name,
@@ -101,6 +102,16 @@ public function addUser(Request $request){
                 'created_at'                =>   date('Y-m-d H:i:s'),
                 'user_types_id'			    =>	 $request->user_types_id
             ]);
+
+            $shop_id = 0;
+            if($user_type == 2){
+                $shop_id =  $customers_id;
+            }
+            if($user_type == 3){
+                $shop_id =  $login_id;
+            }
+            $sql="update users set shop_id=$shop_id where id=$customers_id";
+            DB::update($sql);
 
             $addUserRoles = DB::table('user_permission')->insert([
                 'user_types_id'   =>   $request->user_types_id,
