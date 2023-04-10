@@ -62,6 +62,12 @@ class ProductsController extends BaseController
       }
     }
 
+    public function cancel_purchase(Request $request){
+      $pur_id = $request->pur_id;
+      $sql="update purchase set status=2 where id=$pur_id";
+      DB::update($sql);
+    }
+
     public function approve_purchase(Request $request){
       $shop_id = Auth::user()->shop_id;
       $created_at = date("Y-m-d H:i:s");
@@ -79,6 +85,8 @@ class ProductsController extends BaseController
         $sql = "insert into stock (shop_id,item_id,stock) values ($shop_id,$item_id,$pqty)";
         DB::insert($sql);
       }
+      $sql="update oc_product set quantity=quantity+$pqty where product_id=$item_id";
+      DB::update($sql);
     }
 
     public function minimum(){

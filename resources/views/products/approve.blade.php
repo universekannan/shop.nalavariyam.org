@@ -55,6 +55,7 @@ z-index: 9;
                   <th>Product Name</th>
                   <th>Available Stock</th>
                   <th>Minimum Stock</th>
+                  <th>Purchase Quantity</th>
                   <th>Price</th>
                   <th>Action</th>
                </tr>
@@ -68,9 +69,12 @@ z-index: 9;
                   <td>{{ $prod->name }}</td>
                   <td>{{ $prod->quantity }}</td>
                   <td>{{ $prod->minimum }}</td>
+                  <td>{{ $prod->pqty }}</td>
                   <td>{{ $prod->price }}</td>
                   @if(Auth::user()->user_types_id != 1)
-                  <td style="color:red" id="purchasetd_{{ $prod->product_id }}"><a onclick="show_approve_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}','{{ $prod->pqty }}','{{ $prod->pur_id }}')" href="#" class="btn btn-xs btn-success">Approve</a></td>
+                  <td style="color:red" id="purchasetd_{{ $prod->product_id }}"><a onclick="show_approve_modal('{{ $prod->product_id }}','{{ $prod->name }}','{{ $prod->minimum }}','{{ $prod->quantity }}','{{ $prod->pqty }}','{{ $prod->pur_id }}')" href="#" class="btn btn-xs btn-success">Approve</a>
+                     <a onclick="cancel_purchase('{{ $prod->product_id }}','{{ $prod->pur_id }}')" class="btn btn-xs btn-danger">Cancel</a>
+                     </td>
                   @else
                   <td></td>
                   @endif

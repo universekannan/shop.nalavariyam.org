@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/approve', 'App\Http\Controllers\ProductsController@approve'); 
     Route::post('/save_purchase', 'App\Http\Controllers\ProductsController@save_purchase');
     Route::post('/approve_purchase', 'App\Http\Controllers\ProductsController@approve_purchase');
+    Route::post('/cancel_purchase', 'App\Http\Controllers\ProductsController@cancel_purchase');
     Route::post('/order', 'App\Http\Controllers\ProductsController@Order');
     Route::post('/stock', 'App\Http\Controllers\ProductsController@Stock');
 

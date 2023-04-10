@@ -79,6 +79,26 @@
     $('#purchasemodal').modal('show');
  }   
  
+ function cancel_purchase(item_id,pur_id){
+    var CSRF_TOKEN = $("input[name=_token]").val();
+    var url =  "{{ url('cancel_purchase') }}";
+    $.ajax({
+     type: 'POST',
+     url: url,
+     data: {
+         pur_id: pur_id,
+         _token: CSRF_TOKEN
+     },
+     success: function (data) {
+      $("#purchasetd_"+item_id).html("");
+     },
+     error : function(error){
+         alert(JSON.stringify(error));
+     }
+    });
+
+ }
+
  function approve_purchase(){
     var CSRF_TOKEN = $("input[name=_token]").val();
     var item_id = $("#product_id").val(); 
