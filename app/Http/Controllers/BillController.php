@@ -31,45 +31,58 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BillController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
- public function manageBill()
-        {
-          $manageproducts = DB::table('oc_product')->select('oc_product.*','oc_product_description.name','oc_product_description.product_id','oc_product.product_id as pID')
-                ->Join('oc_product_description', 'oc_product.product_id', '=', 'oc_product_description.product_id')
-                ->orderBy('oc_product.product_id','Asc')->get();
-           
-            return view("Bill.newbill")->with('manageproducts',$manageproducts);
-        }
+  public function billdetails($from,$to)
+  {
+    //$from = date("Y-m-d");
+    //$to = date("Y-m-d");
+    $shop_id = Auth::user()->shop_id;
+    $sql = "select * from shop_billing where shop_id=$shop_id and bill_date>='$from' and bill_date<='$to' order by billnum desc";
+    $bill = DB::select(DB::raw($sql));
+    return view("Bill.billdetails",compact('from','to','bill'));
+  }
 
-      public function savebill(Request $request)
-      {
-        $shop_id = Auth::user()->shop_id;
-        $sales = $request->get('sales');
-        $amount = $request->get('amount');
-        $sales_array = json_decode($sales,true);
-        $bill_date = date("Y-m-d");
-        $billnum = 0;
-        $sql="select max(billnum) bilnum from shop_billing where shop_id=$shop_id";
-        $result = DB::select(DB::raw($sql));
-        if(count($result) > 0){
-          $billnum = $result[0]->bilnum;
-          $billnum = $billnum + 1;
-        }else{
-          $billnum = 1;
-        }
-        $sql = "insert into shop_billing (shop_id,billnum,bill_date,total) values ($shop_id,$billnum,'$bill_date',$amount)";
-        DB::insert($sql);
-        $bill_id = DB::getPdo()->lastInsertId();
-        foreach($sales_array as $sal){
-          $item_id = $sal["item_id"];
-          $quantity = $sal["item_quantity"];
-          $rate = $sal["item_rate"];
-          $amount = $sal["item_amount"];
-          $sql = "insert into shop_bill_items (shop_id,bill_id,item_id,quantity,item_rate,amount) values ($shop_id,$bill_id,$item_id,$quantity,$rate,$amount)";
-          DB::insert($sql);
-        }
-        echo $billnum;
-      }
+  public function manageBill()
+  {
+    $manageproducts = DB::table('oc_product')->select('oc_product.*','oc_product_description.name','oc_product_description.product_id','oc_product.product_id as pID')
+    ->Join('oc_product_description', 'oc_product.product_id', '=', 'oc_product_description.product_id')
+    ->orderBy('oc_product.product_id','Asc')->get();
+
+    return view("Bill.newbill")->with('manageproducts',$manageproducts);
+  }
+
+  public function savebill(Request $request)
+  {
+    $shop_id = Auth::user()->shop_id;
+    $sales = $request->get('sales');
+    $amount = $request->get('amount');
+    $mobile = $request->get('mobile');
+    $cust_name = $request->get('cust_name');
+    $bar_code = $request->get('bar_code');
+    $sales_array = json_decode($sales,true);
+    $bill_date = date("Y-m-d");
+    $billnum = 0;
+    $sql="select max(billnum) bilnum from shop_billing where shop_id=$shop_id";
+    $result = DB::select(DB::raw($sql));
+    if(count($result) > 0){
+      $billnum = $result[0]->bilnum;
+      $billnum = $billnum + 1;
+    }else{
+      $billnum = 1;
+    }
+    $sql = "insert into shop_billing (shop_id,billnum,bill_date,total,mobile,cust_name,bar_code) values ($shop_id,$billnum,'$bill_date',$amount,'$mobile','$cust_name','$bar_code')";
+    DB::insert($sql);
+    $bill_id = DB::getPdo()->lastInsertId();
+    foreach($sales_array as $sal){
+      $item_id = $sal["item_id"];
+      $quantity = $sal["item_quantity"];
+      $rate = $sal["item_rate"];
+      $amount = $sal["item_amount"];
+      $sql = "insert into shop_bill_items (shop_id,bill_id,item_id,quantity,item_rate,amount) values ($shop_id,$bill_id,$item_id,$quantity,$rate,$amount)";
+      DB::insert($sql);
+    }
+    echo $billnum;
+  }
 
 }

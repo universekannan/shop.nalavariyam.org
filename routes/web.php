@@ -76,7 +76,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('pharmacy/add_supplier', 'App\Http\Controllers\PharmacyCoController@addSupplier');
 
 //Bill//
-     Route::get('/Bill/newbill', 'App\Http\Controllers\BillController@manageBill');
+     Route::get('/newbill', 'App\Http\Controllers\BillController@manageBill');
+     Route::get('/billdetails/{from}/{to}', 'App\Http\Controllers\BillController@billdetails');
      Route::Post('/savebill', 'App\Http\Controllers\BillController@savebill');
 
     

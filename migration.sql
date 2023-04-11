@@ -50,4 +50,9 @@ CREATE TABLE `shop_bill_items` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 
+alter table shop_billing add mobile varchar(50) default null;
+alter table shop_billing add cust_name varchar(50) default null;
+alter table shop_billing add bar_code varchar(20) default null;
+
+
 

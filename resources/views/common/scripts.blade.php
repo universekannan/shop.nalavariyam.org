@@ -67,7 +67,15 @@
     $("#min_stock").html(min_stock);
     $("#avl_stock").html(avl_stock);
     $('#purchasemodal').modal('show');
- }   
+ }  
+
+ function load_billdetails(){
+  var billdetails = "{{ url('billdetails') }}";
+  var from = $("#from").val();
+  var to = $("#to").val();
+  var url =  billdetails + "/" + from + "/" +to; 
+  window.location.href = url;
+ } 
 
  function show_approve_modal(product_id,name,min_stock,avl_stock,pqty,pur_id){
     $("#product_id").val(product_id);
@@ -4193,7 +4201,6 @@ $(document).ready(function(){
     function show_vbm(){
       var VBMArray = $("#PID").val().split("~");
       var name = VBMArray[1];
-
       $("#name").html(name)
     }
 
@@ -4282,6 +4289,10 @@ $(document).ready(function(){
       alert("Amount should be greater than zero");
       return;
     }
+    var mobile = $('#mobile').val();
+    var cust_name = $('#cust_name').val();
+    var bar_code = $('#bar_code').val();
+
     var item_id = $('input[name="product_id[]"]');
     var item_quantity = $('input[name="item_quantity[]"]');
     var item_rate = $('input[name="item_rate[]"]');
@@ -4301,6 +4312,9 @@ $(document).ready(function(){
       data: {
         sales: sales_data,
         amount:total_amount,
+        mobile:mobile,
+        cust_name:cust_name,
+        bar_code:bar_code,
         _token: CSRF_TOKEN
       },
       success: function (sales_id) 

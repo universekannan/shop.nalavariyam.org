@@ -91,23 +91,20 @@ legend {
 </li>
 
 <li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="{{url('Bill/newbill')}}">
+     <a href="{{url('/newbill')}}">
       <img src="{!! asset('dist/img/icon/billing.png') !!}" style="width:50px"></br>
       <label>Billing</label>
     </a>
 </li>
+
+<li class="nav-item d-none d-sm-inline-block col-md-1">
+     <a href="{{url('/billdetails')}}/{{ date('Y-m-d') }}/{{date('Y-m-d')}}">
+      <img src="{!! asset('dist/img/icon/billdet.png') !!}" style="width:50px"></br>
+      <label>Bill Details</label>
+    </a>
+</li>
     
-<li class="nav-item d-none d-sm-inline-block col-md-1">
-      <img src="{!! asset('dist/img/icon/setting.png') !!}" style="width:50px"></br>
-            <div class="dropdown">
-        <label>Setting</label>
-        
-      </div>
-</li>
-<li class="nav-item d-none d-sm-inline-block col-md-1">
-      <img src="{!! asset('dist/img/icon/investigation.png') !!}" style="width:50px"></br>
-      <label>MIS</label>
-</li>
+
 <li class="nav-item d-none d-sm-inline-block col-md-1">
        <img src="{!! asset('dist/img/icon/logout.png') !!}" style="width:50px"></br>
       <div class="dropdown">

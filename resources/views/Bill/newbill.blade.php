@@ -8,14 +8,22 @@
               <div class="col-md-3">
                   <div class="card card-info">
                     <div class="card-body">
-
+                       <div class="form-group row">
+                           <input maxlength="15" type="text" class="form-control number" name="mobile" id="mobile" placeholder="Mobile">
+                       </div>
+                   <div class="form-group row">
+                       <input maxlength="30" type="text" class="form-control" name="cust_name" id="cust_name" placeholder="Customer Name">
+                   </div>
+                   <div class="form-group row">
+                       <input maxlength="12" type="text" class="form-control number" name="bar_code" id="bar_code"  placeholder="Bar Code">
+                   </div>
                         <div class="form-group row">
                           <select class="form-control select2bs4 product" style="width: 100%;" name="PID" id="PID" onchange="show_vbm()">
                             <option>select Product</option>
                             @foreach($manageproducts as $key=>$manageproduct)
                             <option value="{{ $manageproduct->product_id }}~{{ $manageproduct->name }}" data-rate="{{$manageproduct->price }}">
                              {{ $manageproduct->name }}</option>
-                             @endforeach
+                            @endforeach
                          </select>
                      </div>
                      <div class="form-group row">
