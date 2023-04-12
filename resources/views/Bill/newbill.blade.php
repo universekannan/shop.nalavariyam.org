@@ -3,16 +3,14 @@
 <style>
 .tt-hint,
 .product_id2 {
-    //border: 1px solid blue !important;
+    border: 1px solid blue !important;
     font-size: 18px;
     height: 35px;
     line-height: 30px;
     outline: medium none;
     padding: 8px 12px;
-    width: 200px !important;
 }
 .tt-dropdown-menu {
-    width: 200px;
     margin-top: 5px;
     padding: 8px 12px;
     background-color: #fff;
@@ -28,22 +26,7 @@
     background-color: #2caab3;
     color: white !important;
 }
-.but{
-  width:120px;
-  border:1px solid;
-  padding:8px;
-  
-  background-color:lightgray;
-  color:black;
-}
-.but:hover{
-  background-color:green;
-  color:white;
-}
-.b{
-  float:right;
-  margin-left:570px;
-}
+
 </style>
 <div class="content-wrapper">
    <section class="content">
@@ -63,7 +46,8 @@
                        <input maxlength="12" type="text" class="form-control number" name="bar_code" id="bar_code"  placeholder="Bar Code">
                    </div>
                         <div class="form-group row">
-                          <input placeholder="Enter Item Name" autofocus autocomplete="off" maxlength="100" class="form-control product_id2" id="product_id2" name="product_id2" />
+                          <input tabindex="0" onkeypress="return runScript1(event)" placeholder="Enter Item Name" autofocus autocomplete="off" maxlength="100" class="form-control product_id2" id="product_id2" name="product_id2" />
+                          <input type="hidden" name="PID" id="PID" value="">
                      </div>
                      <div class="form-group row">
                        <input  required="required" type="text" class="form-control rate"

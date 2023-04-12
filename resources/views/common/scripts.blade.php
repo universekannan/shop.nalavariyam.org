@@ -267,8 +267,18 @@
     remote: 'itemsearch/%QUERY'
     }
     ).on('typeahead:selected', function (obj, datum) {
-        alert("ok");
+        $('#PID').val(datum.id);
+        $('#rate').val(datum.price);
     });
+
+    function runScript1(e) {
+      if (e.keyCode == 13) {
+          var PID = $('#PID').val();
+          if(PID != ""){
+              $('#quantity').focus();
+          }
+      }
+    }
 
     function runScript2(e) {
       if (e.keyCode == 13) {
@@ -300,17 +310,15 @@
       return false;
     }
 
-    var VBMArray = $("#PID").val().split("~");
-    var product_id = VBMArray[0];
-    var name = VBMArray[1];
-    $("#name").html(name)
+    var product_id = $("#PID").val();
     var amount=$('#total').val();
     if(amount!="")
     {
-      var item_name=$('#PID').val();
-      var item_rate=$('#rate').val();
-      var item_quantity=$('#quantity').val();
-      var rate=$('#total').val();
+      var product_id = $('#PID').val();
+      var name = $('#product_id2').val();
+      var item_rate = $('#rate').val();
+      var item_quantity = $('#quantity').val();
+      var rate = $('#total').val();
 
 
       $('#addr'+i).html("<td class='serial_num'>"+ (i+1) +"</td>"
@@ -327,6 +335,7 @@
       $('#quantity').val("");
       $('#amount').val("");
       $('#PID').val("");
+      $('#product_id2').val("");
       var total_amount=0;
 
       var item_amount = $('input[name="total[]"]');
@@ -340,7 +349,7 @@
       $('#total_amount').val(total_amount);
       $('#total').val('');
         //$('#PID option:eq(0)').attr('selected','selected'); 
-
+      $('#product_id2').focus();
     }
   }
 

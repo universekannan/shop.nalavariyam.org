@@ -35,12 +35,14 @@ class BillController extends BaseController
 
   public function itemsearch($query){
     $query = trim($query);
-    $sql = "select product_id,name from oc_product_description where name like '%$query%'";
+    $shop_id = Auth::user()->shop_id;
+    $sql = "select a.product_id,a.name,c.price,b.stock from oc_product_description a,stock b,oc_product c where a.product_id=c.product_id and a.product_id=b.item_id and b.shop_id=$shop_id and a.name like '%$query%' and b.stock > 0";
     $sql= $sql ." order by name LIMIT 20";
     $result = DB::select(DB::raw($sql));
     $array = array();
     foreach ($result as $key => $res) {
-      $array[] = array('value' => $res->name,'id' => $res->product_id);
+      $price = number_format($res->price,2);
+      $array[] = array('value' => $res->name,'id' => $res->product_id,'price' => $res->price,'stock' => $res->stock);
     }
     echo json_encode($array);
   }
