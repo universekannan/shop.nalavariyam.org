@@ -33,10 +33,30 @@ class BillController extends BaseController
 {
   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+  public function viewbill($id){
+    $shop_id = Auth::user()->shop_id;
+    $sql = "select * from shop_billing where shop_id=$shop_id and id=$id";
+    $result = DB::select(DB::raw($sql));
+    $billnum = "";
+    $bill_date = "";
+    $mobile = "";
+    $cust_name = "";
+    $total = "";
+    if(count($result) > 0){
+      $billnum = $result[0]->billnum;
+      $bill_date = $result[0]->bill_date;
+      $mobile = $result[0]->mobile;
+      $cust_name = $result[0]->cust_name;
+      $total = $result[0]->total;
+    }
+    $bill_date = date("d-m-Y",strtotime($bill_date));
+    $sql = "select a.*,b.name from shop_bill_items a,oc_product_description b where a.item_id=b.product_id and shop_id=$shop_id and bill_id=$id";
+    $bill = DB::select(DB::raw($sql));
+    return view("Bill.viewbill",compact('total','billnum','bill_date','mobile','cust_name','bill'));
+  }
+
   public function billdetails($from,$to)
   {
-    //$from = date("Y-m-d");
-    //$to = date("Y-m-d");
     $shop_id = Auth::user()->shop_id;
     $sql = "select * from shop_billing where shop_id=$shop_id and bill_date>='$from' and bill_date<='$to' order by billnum desc";
     $bill = DB::select(DB::raw($sql));

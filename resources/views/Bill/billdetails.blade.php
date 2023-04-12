@@ -32,6 +32,7 @@
             <tr>
                <th>#</th>
                <th>Bill#</th>
+               <th>View</th>
                <th>Date</th>
                <th>Total</th>
                <th>Mobile</th>
@@ -43,6 +44,7 @@
             <tr>
                <td>{{ $key + 1 }}</td>
                <td>{{ $b->billnum }}</td>
+               <td><a href="#" onclick="view_bill({{ $b->id }})" class="fa fa-eye" ></a></td>
                <td>{{ $b->bill_date }}</td>
                <td>{{ $b->total }}</td>
                <td>{{ $b->mobile }}</td>
