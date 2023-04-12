@@ -1,5 +1,50 @@
 @extends('layout')
 @section('content')
+<style>
+.tt-hint,
+.product_id2 {
+    //border: 1px solid blue !important;
+    font-size: 18px;
+    height: 35px;
+    line-height: 30px;
+    outline: medium none;
+    padding: 8px 12px;
+    width: 200px !important;
+}
+.tt-dropdown-menu {
+    width: 200px;
+    margin-top: 5px;
+    padding: 8px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    
+    font-size: 14px;
+    color: #111;
+    background-color: #F1F1F1;
+    text-align: left;
+}
+.tt-is-under-cursor {
+    background-color: #2caab3;
+    color: white !important;
+}
+.but{
+  width:120px;
+  border:1px solid;
+  padding:8px;
+  
+  background-color:lightgray;
+  color:black;
+}
+.but:hover{
+  background-color:green;
+  color:white;
+}
+.b{
+  float:right;
+  margin-left:570px;
+}
+</style>
 <div class="content-wrapper">
    <section class="content">
     <section class="content">
@@ -18,13 +63,7 @@
                        <input maxlength="12" type="text" class="form-control number" name="bar_code" id="bar_code"  placeholder="Bar Code">
                    </div>
                         <div class="form-group row">
-                          <select class="form-control select2bs4 product" style="width: 100%;" name="PID" id="PID" onchange="show_vbm()">
-                            <option>select Product</option>
-                            @foreach($manageproducts as $key=>$manageproduct)
-                            <option value="{{ $manageproduct->product_id }}~{{ $manageproduct->name }}" data-rate="{{$manageproduct->price }}">
-                             {{ $manageproduct->name }}</option>
-                            @endforeach
-                         </select>
+                          <input placeholder="Enter Item Name" autofocus autocomplete="off" maxlength="100" class="form-control product_id2" id="product_id2" name="product_id2" />
                      </div>
                      <div class="form-group row">
                        <input  required="required" type="text" class="form-control rate"
@@ -32,7 +71,7 @@
                        placeholder="Price">
                    </div>
                    <div class="form-group row">
-                       <input onkeyup="calculate_amount()"  required="required" type="number" class="form-control"
+                       <input onkeypress="return runScript2(event)" onkeyup="calculate_amount()"  required="required" type="number" class="form-control"
                        name="product_code" id="quantity"
                        placeholder="Quantity">
                    </div>

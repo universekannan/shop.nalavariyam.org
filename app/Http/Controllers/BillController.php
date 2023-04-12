@@ -33,6 +33,18 @@ class BillController extends BaseController
 {
   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+  public function itemsearch($query){
+    $query = trim($query);
+    $sql = "select product_id,name from oc_product_description where name like '%$query%'";
+    $sql= $sql ." order by name LIMIT 20";
+    $result = DB::select(DB::raw($sql));
+    $array = array();
+    foreach ($result as $key => $res) {
+      $array[] = array('value' => $res->name,'id' => $res->product_id);
+    }
+    echo json_encode($array);
+  }
+
   public function viewbill($id){
     $shop_id = Auth::user()->shop_id;
     $sql = "select * from shop_billing where shop_id=$shop_id and id=$id";
