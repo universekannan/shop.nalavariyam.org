@@ -3,8 +3,8 @@
    <thead>
       <tr><td style="text-align: center" colspan="5">Nalavariam</td></tr>
       <tr><td colspan="5">&nbsp;</td></tr>
-      <tr><td colspan="2" style="text-align: left">{{ $cust_name }}</td><td colspan="2" style="text-align: right">{{ $mobile }}</td></tr>
-      <tr><td colspan="2" style="text-align: left">Bill No: {{ $billnum }}</td><td colspan="2" style="text-align: right">Date : {{ $bill_date }}</td></tr>
+      <tr><td colspan="2" style="text-align: left">Name : {{ $cust_name }}</td><td colspan="2" style="text-align: right">Mobile : {{ $mobile }}</td></tr>
+      <tr><td colspan="2" style="text-align: left">Bill No : {{ $billnum }}</td><td colspan="2" style="text-align: right">Date : {{ $bill_date }}</td></tr>
       <tr><td colspan="5">&nbsp;</td></tr>
       <tr>
          <th style="text-align: left">Item</th>
