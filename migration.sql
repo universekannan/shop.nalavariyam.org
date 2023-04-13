@@ -54,5 +54,9 @@ alter table shop_billing add mobile varchar(50) default null;
 alter table shop_billing add cust_name varchar(50) default null;
 alter table shop_billing add bar_code varchar(20) default null;
 
+alter table oc_product_description add bar_code varchar(20) default null;
+
+
+
 
 

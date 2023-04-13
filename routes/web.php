@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/roles', 'App\Http\Controllers\PermissionsController@roles');
     Route::post('/addroles', 'App\Http\Controllers\PermissionsController@addRoles');
 
+    Route::get('/getitembybarcode/{barcode}', 'App\Http\Controllers\BillController@getitembybarcode');
+    Route::get('/barcode', 'App\Http\Controllers\ProductsController@barcode');
+    Route::post('/save_barcode', 'App\Http\Controllers\ProductsController@save_barcode');
     Route::get('/products', 'App\Http\Controllers\ProductsController@manageProducts');
     Route::get('/minimum', 'App\Http\Controllers\ProductsController@minimum'); 
     Route::get('/pending', 'App\Http\Controllers\ProductsController@pending'); 

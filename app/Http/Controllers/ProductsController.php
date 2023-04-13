@@ -58,6 +58,23 @@ public function cancel_purchase(Request $request){
     DB::update($sql);
 }
 
+public function barcode(){
+  $sql = "select * from oc_product_description order by name";
+  $products = DB::select(DB::raw($sql));
+  return view("products.barcode",compact('products'));
+}
+
+public function save_barcode(Request $request){
+  $product_id = $request->product_id;
+  $bar_code = $request->bar_code;
+  foreach ($product_id as $key => $pid) {
+    $bcode = $bar_code[$key];
+    $sql="update oc_product_description set bar_code='$bcode' where product_id=$pid";
+    DB::update($sql);
+  }
+  return redirect('/barcode');
+}
+
 public function approve_purchase(Request $request){
     $shop_id = Auth::user()->shop_id;
     $created_at = date("Y-m-d H:i:s");
@@ -132,6 +149,7 @@ public function pending(){
   }
   return view("products.pending")->with('manageproduct', $manageproduct);
 }
+
 
 public function manageProducts(){
   $shop_id = Auth::user()->shop_id;

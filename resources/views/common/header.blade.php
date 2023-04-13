@@ -81,6 +81,9 @@ legend {
 @if(Auth::user()->user_types_id == 1 || Auth::user()->user_types_id == 2)
   <a class="dropbtn"><label>Products</label></a>
   <div class="dropdown-content">
+  @if(Auth::user()->user_types_id == 1)
+  <a href="{{url('/barcode')}}">Bar Code</a>
+  @endif
   <a href="{{url('/products')}}">All Products</a>
   <a href="{{url('/minimum')}}">Purchase</a>
   <a href="{{url('/pending')}}">Purchase Print</a>

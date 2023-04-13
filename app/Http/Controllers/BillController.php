@@ -33,6 +33,21 @@ class BillController extends BaseController
 {
   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+  public function getitembybarcode($barcode){
+    $shop_id = Auth::user()->shop_id;
+    $sql = "select a.product_id,a.name,c.price,b.stock from oc_product_description a,stock b,oc_product c where a.product_id=c.product_id and a.product_id=b.item_id and b.shop_id=$shop_id and a.bar_code = '$barcode' and b.stock > 0";
+    $result = DB::select(DB::raw($sql));
+    $response = array();
+    $response["product_id"] = 0;
+    if(count($result) > 0){
+      $response["product_id"] = $result[0]->product_id;
+      $response["name"] = $result[0]->name;
+      $response["price"] = number_format($result[0]->price,2);
+      $response["stock"] = $result[0]->stock;
+    }
+    echo json_encode($response);
+  }
+
   public function itemsearch($query){
     $query = trim($query);
     $shop_id = Auth::user()->shop_id;
@@ -42,7 +57,7 @@ class BillController extends BaseController
     $array = array();
     foreach ($result as $key => $res) {
       $price = number_format($res->price,2);
-      $array[] = array('value' => $res->name,'id' => $res->product_id,'price' => $res->price,'stock' => $res->stock);
+      $array[] = array('value' => $res->name,'id' => $res->product_id,'price' => $price,'stock' => $res->stock);
     }
     echo json_encode($array);
   }
@@ -115,6 +130,10 @@ class BillController extends BaseController
       $amount = $sal["item_amount"];
       $sql = "insert into shop_bill_items (shop_id,bill_id,item_id,quantity,item_rate,amount) values ($shop_id,$bill_id,$item_id,$quantity,$rate,$amount)";
       DB::insert($sql);
+      $sql="update stock set stock = stock - $quantity where shop_id=$shop_id and item_id=$item_id";
+      DB::update($sql);
+      $sql="update oc_product set quantity = quantity - $quantity where  product_id=$item_id";
+      DB::update($sql);
     }
     echo $billnum;
   }
