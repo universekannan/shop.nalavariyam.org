@@ -35,6 +35,8 @@
                <th>View</th>
                <th>Date</th>
                <th>Total</th>
+               <th>GST</th>
+               <th>Net Total</th>
                <th>Mobile</th>
                <th>Customer</th>
             </tr>
@@ -47,6 +49,8 @@
                <td><a href="#" onclick="view_bill({{ $b->id }})" class="fa fa-eye" ></a></td>
                <td>{{ $b->bill_date }}</td>
                <td>{{ $b->total }}</td>
+               <td>{{ $b->gst_amount }}</td>
+               <td>{{ $b->net_amount }}</td>
                <td>{{ $b->mobile }}</td>
                <td>{{ $b->cust_name }}</td>
             </tr>

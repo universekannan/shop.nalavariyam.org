@@ -136,7 +136,7 @@ function approve_purchase(){
 function view_bill(id){
   var url =  "{{ url('viewbill') }}";
   url = url + "/" + id;
-  w=500;h=200;
+  w=500;h=600;
   var left = (screen.width/2)-(w/2);
   var top = 0;
   window.open(url, "Bill", 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
@@ -229,6 +229,8 @@ $(document).ready(function () {
         $('#product_id2').val(data["name"]);
         $('#product_id3').val(data["name"]);
         $('#rate').val(data["price"]);
+        $('#GST').val(data["gst"]);
+        $('#tax_name').val(data["tax_name"]);
         $('#quantity').focus();
       }
     })
@@ -266,9 +268,12 @@ $(document).ready(function () {
   function calculate_amount() {
     var rate = $('#rate').val();
     var quantity = $('#quantity').val();
+    var gst = $('#GST').val();
     if(quantity!="" && rate!=""){
       var amount=rate*quantity;
+      var gst_amount = (amount*gst)/100;
       $('#total').val(amount);
+      $('#gst_amount').val(gst_amount);
     }else{
       $('#total').val("");
     }
@@ -282,6 +287,8 @@ $(document).ready(function () {
   }
   ).on('typeahead:selected', function (obj, datum) {
     $('#PID').val(datum.id);
+    $('#GST').val(datum.gst);
+    $('#tax_name').val(datum.tax_name);
     $('#product_id3').val(datum.value);
     $('#rate').val(datum.price);
     $('#quantity').focus();
@@ -328,6 +335,7 @@ $(document).ready(function () {
 
   var product_id = $("#PID").val();
   var amount=$('#total').val();
+  var gst_amount=$('#gst_amount').val();
   if(amount!="")
   {
     var product_id = $('#PID').val();
@@ -336,7 +344,7 @@ $(document).ready(function () {
     var item_quantity = $('#quantity').val();
     var rate = parseFloat($('#total').val()).toFixed(2);
     $('#addr'+i).html("<td class='serial_num'>"+ (i+1) +"</td>"
-      +"<td><input readonly value='"+name+"'  name='item_name[]' type='text'  class='form-control'><input readonly value='"+product_id+"' name='product_id[]' type='hidden'  class='form-control'></td>"
+      +"<td><input readonly value='"+name+"'  name='item_name[]' type='text'  class='form-control'><input readonly value='"+product_id+"' name='product_id[]' type='hidden'  class='form-control'><input readonly value='"+gst_amount+"' name='gst_amount2[]' type='hidden'  class='form-control'></td>"
 
       +"<td><input readonly value="+item_quantity+" name='item_quantity[]' type='text'  class='form-control'></td>"
 
@@ -349,13 +357,22 @@ $(document).ready(function () {
     $('#quantity').val("");
     $('#amount').val("");
     var total_amount=0;
+    var gst_amount3=0;
+    var net_amount=0;
     var item_amount = $('input[name="total[]"]');
+    var gst_amount4 = $('input[name="gst_amount2[]"]');
     for(var j=0;j<i;j++){
       total_amount=total_amount+parseInt(item_amount.eq(j).val());
+      gst_amount3=gst_amount3+parseInt(gst_amount4.eq(j).val());
     }
     $('#total_amount').val(total_amount.toFixed(2));
+    $('#gat_amount5').val(gst_amount3.toFixed(2));
+    net_amount = total_amount + gst_amount3;
+    $('#net_amount').val(net_amount.toFixed(2));
+    $('#total').val('');
     $('#total').val('');
     $('#PID').val("");
+    $('#GST').val("0");
     $('#product_id2').val('');
     $('#product_id3').val('');
     $('#bar_code').val('');
@@ -372,12 +389,18 @@ $(document).ready(function () {
   $("#addr"+(row)).html('');
   i--;
   var total_amount=0;
+  var gst_amount3=0;
+  var net_amount=0;
   var item_amount = $('input[name="total_amount[]"]');
+  var gst_amount4 = $('input[name="gst_amount2[]"]');
   for(var j=0;j<i;j++){
     total_amount=total_amount+parseInt(item_amount.eq(j).val());
+    gst_amount3=gst_amount3+parseInt(gst_amount4.eq(j).val());
   }
   $('#total_amount').val(total_amount);
-
+  $('#gat_amount5').val(gst_amount3.toFixed(2));
+  net_amount = total_amount + gst_amount3;
+  $('#net_amount').val(net_amount.toFixed(2));
 }
 </script>
 
@@ -387,6 +410,8 @@ $(document).ready(function () {
   {
     var CSRF_TOKEN = $("input[name=_token]").val();
     var total_amount = ~~parseInt($('#total_amount').val());
+    var gst_amount = ~~parseInt($('#gat_amount5').val());
+    var net_amount = ~~parseInt($('#net_amount').val());
     if(total_amount<=0)
     {
       alert("Amount should be greater than zero");
@@ -415,6 +440,8 @@ $(document).ready(function () {
       data: {
         sales: sales_data,
         amount:total_amount,
+        gst_amount:gst_amount,
+        net_amount:net_amount,
         mobile:mobile,
         cust_name:cust_name,
         bar_code:bar_code,
@@ -423,6 +450,8 @@ $(document).ready(function () {
       success: function (sales_id) 
       {
         $("#total_amount").val('');
+        $("#gat_amount5").val('');
+        $("#net_amount").val('');
         for(var j=0;j<i;j++){
           $("#addr"+(j)).html('');
         }

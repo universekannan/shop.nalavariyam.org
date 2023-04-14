@@ -56,6 +56,10 @@ alter table shop_billing add bar_code varchar(20) default null;
 
 alter table oc_product_description add bar_code varchar(20) default null;
 
+alter table shop_billing add gst_amount decimal(10,2) default 0;
+alter table shop_billing add net_amount decimal(10,2) default 0;
+
+
 
 
 

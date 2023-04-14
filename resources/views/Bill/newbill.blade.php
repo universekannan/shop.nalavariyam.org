@@ -46,6 +46,8 @@
            <div class="form-group row" id="product_div">
             <input tabindex="0" onkeypress="return runScript1(event)" placeholder="" autofocus autocomplete="off" maxlength="100" class="form-control product_id2" id="product_id2" name="product_id2" />
             <input type="hidden" name="PID" id="PID" value="">
+            <input type="hidden" name="GST" id="GST" value="0">
+            <input type="hidden" name="tax_name" id="tax_name" value="">
             <input type="hidden" name="product_id3" id="product_id3" value="">
           </div>
           <div class="form-group row">
@@ -60,6 +62,7 @@
            <input  required="required" disabled type="text" class="form-control"
            name="total" id="total" 
            placeholder="Total">
+           <input type="hidden" name="gst_amount" id="gst_amount" value="0">
          </div>
          <div class="form-group row">
           <div class="col-md-12 text-center">
@@ -119,12 +122,34 @@
           </div>
 
           <div class="form-group row">
-            <div class="col-sm-12 col-md-8"></div>
-            <label class="control-label col-md-1">Total</label>
+            <div class="col-sm-12 col-md-6"></div>
+            <label class="control-label col-md-3">Total</label>
 
             <div class="col-md-3 pull-right form-inline">
 
               <input readonly type="text" name="total_amount" id="total_amount" class="form-control Number">
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12 col-md-6"></div>
+            <label class="control-label col-md-3">GST</label>
+
+            <div class="col-md-3 pull-right form-inline">
+
+              <input readonly type="text" name="gat_amount5" id="gat_amount5" class="form-control Number">
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12 col-md-6"></div>
+            <label class="control-label col-md-3">Net Total</label>
+
+            <div class="col-md-3 pull-right form-inline">
+
+              <input readonly type="text" name="net_amount" id="net_amount" class="form-control Number">
 
             </div>
           </div>
