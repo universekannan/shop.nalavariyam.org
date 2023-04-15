@@ -63,14 +63,30 @@ legend {
       <label>Dashboard</label>
     </a>
 </li>
+@if(Auth::user()->user_types_id == 1)
+<li class="nav-item d-none d-sm-inline-block col-md-1">
+        <img src="{!! asset('dist/img/icon/shop.png') !!}" style="width:50px"></br>
+@endif
+@if(Auth::user()->user_types_id == 2)
 <li class="nav-item d-none d-sm-inline-block col-md-1">
         <img src="{!! asset('dist/img/icon/user.png') !!}" style="width:50px"></br>
+@endif
 <div class="dropdown">
 @if(Auth::user()->user_types_id == 1 || Auth::user()->user_types_id == 2)
+  @if(Auth::user()->user_types_id == 1)
+  <a class="dropbtn"><label>Shop</label></a>
+  @endif
+  @if(Auth::user()->user_types_id == 2)
   <a class="dropbtn"><label>Users</label></a>
+  @endif
   <div class="dropdown-content">
+  @if(Auth::user()->user_types_id == 1)
+  <a href="{{url('/users')}}">Shop List</a>
+  @endif
+  @if(Auth::user()->user_types_id == 2)
   <a href="{{url('/users')}}">Users</a>
-  <a href="{{url('/users/permissions')}}">Permissions</a>
+  @endif
+  <!-- <a href="{{url('/users/permissions')}}">Permissions</a> -->
   </div>
 @endif
 </div>
@@ -87,7 +103,7 @@ legend {
 
 @if(Auth::user()->user_types_id == 1)
 <li class="nav-item d-none d-sm-inline-block col-md-1">
-     <a href="{{url('/Products')}}">
+     <a href="{{url('/barcode')}}">
       <img src="{!! asset('dist/img/icon/barcode.png') !!}" style="width:50px"></br>
       <label>Bar Code</label>
     </a>
@@ -120,21 +136,23 @@ legend {
     </a>
 </li>
 @endif
-
+@if(Auth::user()->user_types_id != 1)
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="{{url('/newbill')}}">
       <img src="{!! asset('dist/img/icon/billing.png') !!}" style="width:50px"></br>
       <label>Billing</label>
     </a>
 </li>
+@endif
 
+@if(Auth::user()->user_types_id != 1)
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="{{url('/billdetails')}}/{{ date('Y-m-d') }}/{{date('Y-m-d')}}">
       <img src="{!! asset('dist/img/icon/billdet.png') !!}" style="width:50px"></br>
       <label>Bill Details</label>
     </a>
 </li>
-    
+@endif    
 
 <li class="nav-item d-none d-sm-inline-block col-md-1">
        <img src="{!! asset('dist/img/icon/logout.png') !!}" style="width:50px"></br>

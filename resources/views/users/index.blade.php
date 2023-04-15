@@ -1,5 +1,12 @@
 @extends('layout')
 @section('content')
+<?php
+$text="";
+if(Auth::user()->user_types_id == 1)
+$text="Shop List";
+elseif(Auth::user()->user_types_id == 2)
+$text="All Users";
+?>
 <div class="content-wrapper">
    <section class="content">
     <div class="card card-primary card-outline card-outline-tabs">
@@ -7,14 +14,12 @@
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                 
                   <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">All Users</a>
+                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">{{$text }}</a>
                   </li>
 
                   <div class="col-sm-6">
-                   <center> <div class="nav-link">User List</div></center>
                     </div>
                     <div class="col-sm-4" style="padding-top: calc(.5rem + 0px);">
-                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Customer Full Name">
                     </div>
                     <div class="col-sm-1" style="padding-top: calc(.5rem + 0px);">
                         <td>
@@ -61,21 +66,7 @@
                           <td>Inactive</td>
                         @endif
                         <td>
-                          @if($manageuserslist->user_types_id !=1 )
-                            
-                           <div class="btn-group dropdown">
-
-<button type="button" class="btn btn-default btn-outline-danger btn-xs fa fa-eye" data-toggle="dropdown">
-</button>
-<button type="button" class="btn btn-default btn-outline-danger btn-xs">Action</button>
-
-<div class="dropdown-content">
-<a href="" data-toggle="modal" data-target="#edit{{ $manageuserslist->userID }}">Edit Profile</a>
-<a href="{{url('/users/attendance/'.$manageuserslist->userID)}}" > Attendance</a>
-</div>
-</div>
-                       
-                          @endif
+<a href="" data-toggle="modal" class="fa fa-edit" data-target="#edit{{ $manageuserslist->userID }}"></a>
                         </td>
                         <div class="modal fade" id="edit{{ $manageuserslist->userID }}">
                             <form action="{{url('/edit_user')}}" method="post">
@@ -84,13 +75,23 @@
                                     <div class="modal-content">
 
                                         <div class="modal-header">
+                                    @if(Auth::user()->user_types_id == 1)
+                                    <h4 class="modal-title">Edit Shop</h4>
+                                    @endif
+                                    @if(Auth::user()->user_types_id == 2)
                                     <h4 class="modal-title">Edit User</h4>
+                                    @endif
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     </div>
                                   
                                     <div class="modal-body">
+                                      <div class="row">
+<div class="col-md-12"> 
+<input @if(Auth::user()->user_types_id == 2) readonly @endif value="{{ $manageuserslist->shop_name }}" type="text" class="form-control mb-3" name="shop_name" maxlength="50" placeholder="Enter Shop Name"/>
+</div>
+</div>
                                       <div class="row">
                                          <div class="col-md-6">   
                   <input type="hidden" class="form-control" name="id" value="{{ $manageuserslist->userID }}"/>
