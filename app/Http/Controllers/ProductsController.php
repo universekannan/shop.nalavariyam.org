@@ -40,7 +40,7 @@ class ProductsController extends BaseController
 
 public function save_purchase(Request $request){
     $shop_id = Auth::user()->shop_id;
-    $created_at = date("Y-m-d H:i:s");
+    $created_at = date("Y-m-d");
     $item_id = $request->item_id;
     $pqty = $request->pqty;
     $sql="select * from purchase where shop_id=$shop_id and item_id=$item_id and status=0";
@@ -81,7 +81,8 @@ public function approve_purchase(Request $request){
     $item_id = $request->item_id;
     $pqty = $request->pqty;
     $pur_id = $request->pur_id;
-    $sql="update purchase set status=1 where id=$pur_id";
+    $created_at = date("Y-m-d");
+    $sql="update purchase set status=1,created_at='$created_at' where id=$pur_id";
     DB::update($sql);
     $sql="select * from stock where shop_id=$shop_id and item_id=$item_id";
     $result = DB::select(DB::raw($sql));

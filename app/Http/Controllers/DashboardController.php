@@ -34,22 +34,48 @@ use DateInterval;
 
 class DashboardController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+	public function dashboard(){
+        $user_types_id =  Auth::user()->user_types_id;
+    	$shop_id = Auth::user()->shop_id;
+    	$products=0;
+    	$bill=0;
+    	$purchase=0;
+    	$stock=0;
+    	$today=date("Y-m-d");
+    	if($user_types_id==1){
+			$sql="select count(*) as no_of_items from oc_product where quantity <>0";
+			$result = DB::select(DB::raw($sql));
+			if(count($result) > 0){
+			  $products = $result[0]->no_of_items;
+			}
+		}else{
+			$sql="select count(*) as no_of_items from stock where shop_id = $shop_id";
+			$result = DB::select(DB::raw($sql));
+			if(count($result) > 0){
+			  $products = $result[0]->no_of_items;
+			}
+		}
+		$sql="select count(*) as no_of_items from shop_billing where bill_date = '$today'";
+		if($user_types_id != 1) $sql=$sql." and shop_id=$shop_id";
+		$result = DB::select(DB::raw($sql));
+		if(count($result) > 0){
+		  $bill = $result[0]->no_of_items;
+		}
+		$sql="select count(*) as no_of_items from purchase where created_at = '$today' and status=0";
+		if($user_types_id != 1) $sql=$sql." and shop_id=$shop_id";
+		$result = DB::select(DB::raw($sql));
+		if(count($result) > 0){
+		  $purchase = $result[0]->no_of_items;
+		}
+		$sql="select count(*) as no_of_items from purchase where created_at = '$today' and status=1";
+		if($user_types_id != 1) $sql=$sql." and shop_id=$shop_id";
+		$result = DB::select(DB::raw($sql));
+		if(count($result) > 0){
+		  $stock = $result[0]->no_of_items;
+		}
 
-     /******   dashboard Start ******/
-
-        public function dashboard(){
-
-
-            return view("dashboard");
-
-        }
-
-    /******   dashboard end ******/
-
-
-
-
-
+		return view("dashboard",compact('products','bill','purchase','stock'));
+	}
 }

@@ -11,13 +11,12 @@
 
 <div class="small-box bg-info">
 <div class="inner">
-<h3>150</h3>
-<p>New Orders</p>
+<h3>{{ $products }}</h3>
+<p>Total Products</p>
 </div>
 <div class="icon">
 <i class="ion ion-bag"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 </div>
 </div>
 
@@ -25,13 +24,12 @@
 
 <div class="small-box bg-success">
 <div class="inner">
-<h3>53<sup style="font-size: 20px">%</sup></h3>
-<p>Bounce Rate</p>
+<h3>{{ $bill }}</h3>
+<p>No of Bills</p>
 </div>
 <div class="icon">
 <i class="ion ion-stats-bars"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 </div>
 </div>
 
@@ -39,13 +37,12 @@
 
 <div class="small-box bg-warning">
 <div class="inner">
-<h3>44</h3>
-<p>User Registrations</p>
+<h3>{{ $purchase }}</h3>
+<p>Purchase</p>
 </div>
 <div class="icon">
 <i class="ion ion-person-add"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 </div>
 </div>
 
@@ -53,70 +50,17 @@
 
 <div class="small-box bg-danger">
 <div class="inner">
-<h3>65</h3>
-<p>Unique Visitors</p>
+<h3>{{ $stock }}</h3>
+<p>Stock</p>
 </div>
 <div class="icon">
 <i class="ion ion-pie-graph"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 </div>
 </div>
 </div>
 
-<div class="row">
-<div class="col-12 col-sm-6 col-md-3">
-<div class="info-box">
-<span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-<div class="info-box-content">
-<span class="info-box-text">CPU Traffic</span>
-<span class="info-box-number">
-10
-<small>%</small>
-</span>
-</div>
 
-</div>
-
-</div>
-
-<div class="col-12 col-sm-6 col-md-3">
-<div class="info-box mb-3">
-<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-<div class="info-box-content">
-<span class="info-box-text">Likes</span>
-<span class="info-box-number">41,410</span>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="clearfix hidden-md-up"></div>
-<div class="col-12 col-sm-6 col-md-3">
-<div class="info-box mb-3">
-<span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-<div class="info-box-content">
-<span class="info-box-text">Sales</span>
-<span class="info-box-number">760</span>
-</div>
-
-</div>
-
-</div>
-
-<div class="col-12 col-sm-6 col-md-3">
-<div class="info-box mb-3">
-<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-<div class="info-box-content">
-<span class="info-box-text">New Members</span>
-<span class="info-box-number">2,000</span>
-</div>
-
-</div>
-
-</div>
 
 </div>
 
