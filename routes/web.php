@@ -58,27 +58,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/order', 'App\Http\Controllers\ProductsController@Order');
     Route::post('/stock', 'App\Http\Controllers\ProductsController@Stock');
 
-
-//Products//
-    Route::get('/pharmacy/products', 'App\Http\Controllers\ProductsController@manageProducts');
-    Route::post('/pharmacy/add_product', 'App\Http\Controllers\ProductsController@addProduct');
-    Route::post('/pharmacy/edit_product', 'App\Http\Controllers\ProductsController@editProduct');
-
-
-
-//packings//
-    Route::get('pharmacy/packings',   'App\Http\Controllers\PharmacyCoController@managePackings');
-    Route::post('pharmacy/add_packings', 'App\Http\Controllers\PharmacyCoController@addpackings');
-
-//company//
-    Route::get('/pharmacy/company', 'App\Http\Controllers\PharmacyCoController@manageCompany');
-    Route::post('pharmacy/add_company', 'App\Http\Controllers\PharmacyCoController@addCompany');
-
-//supplier//     
-    Route::get('/pharmacy/supplier', 'App\Http\Controllers\PharmacyCoController@manageSupplier');
-    Route::post('pharmacy/add_supplier', 'App\Http\Controllers\PharmacyCoController@addSupplier');
-
-//Bill//
      Route::get('/newbill', 'App\Http\Controllers\BillController@manageBill');
      Route::get('/billdetails/{from}/{to}', 'App\Http\Controllers\BillController@billdetails');
      Route::get('/viewbill/{id}', 'App\Http\Controllers\BillController@viewbill');

@@ -75,23 +75,51 @@ legend {
 @endif
 </div>
 </li>
+
+@if(Auth::user()->user_types_id == 2)
 <li class="nav-item d-none d-sm-inline-block col-md-1">
-        <img src="{!! asset('dist/img/icon/product.png') !!}" style="width:50px"></br>
-<div class="dropdown">
-@if(Auth::user()->user_types_id == 1 || Auth::user()->user_types_id == 2)
-  <a class="dropbtn"><label>Products</label></a>
-  <div class="dropdown-content">
-  @if(Auth::user()->user_types_id == 1)
-  <a href="{{url('/barcode')}}">Bar Code</a>
-  @endif
-  <a href="{{url('/products')}}">All Products</a>
-  <a href="{{url('/minimum')}}">Purchase</a>
-  <a href="{{url('/pending')}}">Purchase Print</a>
-  <a href="{{url('/approve')}}">Stock</a>
-  </div>
-@endif
-</div>
+     <a href="{{url('/products')}}">
+      <img src="{!! asset('dist/img/icon/product.png') !!}" style="width:50px"></br>
+      <label>Products</label>
+    </a>
 </li>
+@endif
+
+@if(Auth::user()->user_types_id == 1)
+<li class="nav-item d-none d-sm-inline-block col-md-1">
+     <a href="{{url('/Products')}}">
+      <img src="{!! asset('dist/img/icon/barcode.png') !!}" style="width:50px"></br>
+      <label>Bar Code</label>
+    </a>
+</li>
+@endif
+
+@if(Auth::user()->user_types_id == 2)
+<li class="nav-item d-none d-sm-inline-block col-md-1">
+     <a href="{{url('/minimum')}}">
+      <img src="{!! asset('dist/img/icon/purchase.png') !!}" style="width:50px"></br>
+      <label>Purchase</label>
+    </a>
+</li>
+@endif
+
+@if(Auth::user()->user_types_id == 2)
+<li class="nav-item d-none d-sm-inline-block col-md-1">
+     <a href="{{url('/pending')}}">
+      <img src="{!! asset('dist/img/icon/print.png') !!}" style="width:50px"></br>
+      <label>Print</label>
+    </a>
+</li>
+@endif
+
+@if(Auth::user()->user_types_id == 2)
+<li class="nav-item d-none d-sm-inline-block col-md-1">
+     <a href="{{url('/approve')}}">
+      <img src="{!! asset('dist/img/icon/stock.png') !!}" style="width:50px"></br>
+      <label>Stock</label>
+    </a>
+</li>
+@endif
 
 <li class="nav-item d-none d-sm-inline-block col-md-1">
      <a href="{{url('/newbill')}}">
