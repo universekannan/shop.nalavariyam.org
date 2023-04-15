@@ -89,7 +89,7 @@ z-index: 9;
 </section>
 </div>
 <div class="modal fade" id="purchasemodal">
-<div class="modal-dialog modal-xl">
+<div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
    <h4  class="modal-title" id="product_name">Purchase</h4>

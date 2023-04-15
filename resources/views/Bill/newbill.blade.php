@@ -2,28 +2,33 @@
 @section('content')
 <style>
   .tt-hint,
-  .product_id2 {
-    border: 1px solid blue !important;
-    font-size: 18px;
-    height: 35px;
-    line-height: 30px;
-    outline: medium none;
-    padding: 8px 12px;
-  }
-  .tt-dropdown-menu {
-    margin-top: 5px;
-    padding: 8px 12px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    color: #111;
-    background-color: #F1F1F1;
-    text-align: left;
-  }
-  .tt-is-under-cursor {
-    background-color: #2caab3;
-    color: white !important;
-  }
+    .product_id2 {
+        border: 1px solid blue !important;
+        font-size: 18px;
+        height: 35px;
+        line-height: 30px;
+        outline: medium none;
+        padding: 8px 12px;
+        width: 255px !important;
+    }
+
+    .tt-dropdown-menu {
+        width: 200px;
+        margin-top: 5px;
+        padding: 8px 12px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        
+        font-size: 14px;
+        color: #111;
+        background-color: #F1F1F1;
+        text-align: left;
+    }
+    .tt-is-under-cursor {
+        background-color: #2caab3;
+        color: white !important;
+}
 
 </style>
 <div class="content-wrapper">
@@ -44,16 +49,16 @@
              <input maxlength="13" type="text" class="form-control number" name="bar_code" id="bar_code"  placeholder="Bar Code">
            </div>
            <div class="form-group row" id="product_div">
-            <input tabindex="0" onkeypress="return runScript1(event)" placeholder="" autofocus autocomplete="off" maxlength="100" class="form-control product_id2" id="product_id2" name="product_id2" />
-            <input type="hidden" name="PID" id="PID" value="">
-            <input type="hidden" name="GST" id="GST" value="0">
-            <input type="hidden" name="tax_name" id="tax_name" value="">
-            <input type="hidden" name="product_id3" id="product_id3" value="">
+            <input onkeypress="return runScript1(event)" placeholder="Enter Item Name" autocomplete="off" maxlength="100" class="form-control product_id2" id="product_id2" name="product_id2" />
           </div>
           <div class="form-group row">
            <input  required="required" type="text" class="form-control rate"
            name="product_code" id="rate" disabled  maxlength="50" 
            placeholder="Price">
+           <input type="hidden" name="PID" id="PID" value="">
+            <input type="hidden" name="GST" id="GST" value="0">
+            <input type="hidden" name="tax_name" id="tax_name" value="">
+            <input type="hidden" name="product_id3" id="product_id3" value="">
          </div>
          <div class="form-group row">
            <input maxlength="2" onkeypress="return runScript2(event)" onkeyup="calculate_amount()"  required="required" type="text" class="form-control number"  name="product_code" id="quantity" placeholder="Quantity">
